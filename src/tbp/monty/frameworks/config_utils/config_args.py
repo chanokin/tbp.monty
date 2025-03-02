@@ -19,10 +19,14 @@ import numpy as np
 import wandb
 from scipy.spatial.transform import Rotation
 
+from pathlib import Path
+
 from tbp.monty.frameworks.actions.action_samplers import (
     ConstantSampler,
     UniformlyDistributedSampler,
 )
+from tbp.monty.frameworks.config_utils import default_paths
+
 from tbp.monty.frameworks.config_utils.policy_setup_utils import (
     make_base_policy_config,
     make_curv_surface_policy_config,
@@ -66,6 +70,7 @@ from tbp.monty.frameworks.models.sensor_modules import (
     HabitatSurfacePatchSM,
 )
 
+
 # -- Table of contents --
 # -----------------------
 # Logging Configurations
@@ -73,7 +78,8 @@ from tbp.monty.frameworks.models.sensor_modules import (
 # Monty Configurations
 # -----------------------
 
-monty_logs_dir = os.getenv("MONTY_LOGS")
+
+monty_logs_dir = os.getenv("MONTY_LOGS", default_paths.get_log_dir())
 
 
 @dataclass

@@ -28,6 +28,8 @@ from tbp.monty.frameworks.environments.two_d_data import (
 from tbp.monty.frameworks.environments.ycb import SHUFFLED_YCB_OBJECTS
 from tbp.monty.frameworks.utils.transform_utils import scipy_to_numpy_quat
 
+from tbp.monty.frameworks.config_utils import default_paths
+
 # ---------
 # run / training / eval args
 # ---------
@@ -73,20 +75,24 @@ class EvalExperimentArgs(ExperimentArgs):
 @dataclass
 class EnvInitArgsMontyWorldStandardScenes:
     data_path: str = os.path.join(
-        os.environ["MONTY_DATA"], "worldimages/standard_scenes/"
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "worldimages/standard_scenes/"
     )
 
 
 @dataclass
 class EnvInitArgsMontyWorldBrightScenes:
     data_path: str = os.path.join(
-        os.environ["MONTY_DATA"], "worldimages/bright_scenes/"
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "worldimages/bright_scenes/"
     )
 
 
 @dataclass
 class EnvInitArgsMontyWorldDarkScenes:
-    data_path: str = os.path.join(os.environ["MONTY_DATA"], "worldimages/dark_scenes/")
+    data_path: str = os.path.join(
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "worldimages/dark_scenes/")
 
 
 # Data-set where a hand is prominently visible holding (and thereby partially
@@ -94,7 +100,8 @@ class EnvInitArgsMontyWorldDarkScenes:
 @dataclass
 class EnvInitArgsMontyWorldHandIntrusionScenes:
     data_path: str = os.path.join(
-        os.environ["MONTY_DATA"], "worldimages/hand_intrusion_scenes/"
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "worldimages/hand_intrusion_scenes/"
     )
 
 
@@ -105,7 +112,8 @@ class EnvInitArgsMontyWorldHandIntrusionScenes:
 @dataclass
 class EnvInitArgsMontyWorldMultiObjectScenes:
     data_path: str = os.path.join(
-        os.environ["MONTY_DATA"], "worldimages/multi_object_scenes/"
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "worldimages/multi_object_scenes/"
     )
 
 

@@ -10,6 +10,7 @@ import os
 from dataclasses import dataclass, field
 from typing import Callable, Dict, List, Mapping, Union
 
+from tbp.monty.frameworks.config_utils import default_paths
 from tbp.monty.frameworks.config_utils.make_dataset_configs import (
     FiveLMMountConfig,
     MultiLMMountConfig,
@@ -79,7 +80,10 @@ class EnvInitArgs:
     )
     scene_id: Union[int, None] = field(default=None)
     seed: int = field(default=42)
-    data_path: str = os.path.join(os.environ["MONTY_DATA"], "habitat/objects/ycb")
+    data_path: str = os.path.join(
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "habitat/objects/ycb"
+    )
 
 
 @dataclass
@@ -131,7 +135,10 @@ class EnvInitArgsSurfaceViewMount(EnvInitArgs):
 
 @dataclass
 class EnvInitArgsMontyWorldPatchViewMount(EnvInitArgsPatchViewMount):
-    data_path: str = os.path.join(os.environ["MONTY_DATA"], "numenta_lab")
+    data_path: str = os.path.join(
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "numenta_lab"
+    )
 
 
 @dataclass
@@ -241,7 +248,10 @@ class NoisyPatchViewFinderMountHabitatDatasetArgs:
 
 @dataclass
 class EnvInitArgsShapenetPatchViewMount(EnvInitArgsPatchViewMount):
-    data_path: str = os.path.join(os.environ["MONTY_DATA"], "shapenet")
+    data_path: str = os.path.join(
+        os.environ.get("MONTY_DATA", default_paths.get_data_dir()),
+        "shapenet"
+    )
 
 
 @dataclass
