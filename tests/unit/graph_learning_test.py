@@ -1729,6 +1729,8 @@ class GraphLearningTest(BaseGraphTestCases.BaseGraphTest):
 
     def test_5lm_feature_experiment(self):
         """Test 5 feature LMs voting with two evaluation settings."""
+        pprint("\n\n\n-------------------------------------------------------------------")
+        pprint("Test 5 feature LMs voting with two evaluation settings.")
         pprint("...parsing experiment...")
         config = copy.deepcopy(self.feature_5lm_config)
         self.exp = MontyObjectRecognitionExperiment()
@@ -1745,11 +1747,12 @@ class GraphLearningTest(BaseGraphTestCases.BaseGraphTest):
             # of particular results.
             # self.check_multilm_train_results(train_stats, num_lms=5, min_done=3)
 
-            pprint("...evaluating...")
+            pprint("\n\n...evaluating...")
             self.exp.evaluate()
 
         pprint("...loading and checking eval statistics...")
         eval_stats = pd.read_csv(os.path.join(self.exp.output_dir, "eval_stats.csv"))
+
         # Just testing 1 episode here. Somehow the second rotation doesn't get
         # recognized. Probably just some parameter setting due to flaws in old
         # LM but didn't want to dig too deep into that for now.

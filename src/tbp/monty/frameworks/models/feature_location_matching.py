@@ -150,6 +150,16 @@ class FeatureGraphLM(GraphLM):
         ):
             current_possible_matches = self.get_possible_matches()
             for possible_obj in current_possible_matches:
+                print(f"{possible_obj} ?=< {list(vote_data['pos_object_id_votes'].keys())=}\t"
+                      f"{list(vote_data['neg_object_id_votes'].keys())=}")
+
+                if (
+                    possible_obj not in vote_data["pos_object_id_votes"]
+                    or possible_obj not in vote_data["neg_object_id_votes"]
+                ):
+                    # note: just a place to set the breakpoint for debugging
+                    logging.info(f"Object {possible_obj} not in votes.")
+
                 if (
                     vote_data["neg_object_id_votes"][possible_obj]
                     > vote_data["pos_object_id_votes"][possible_obj]
